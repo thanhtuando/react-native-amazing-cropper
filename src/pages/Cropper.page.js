@@ -600,15 +600,9 @@ class CropperPage extends Component {
       this.state.rotation,
       (rotatedUri) => {
         //
-        ImageEditor.cropImage(rotatedUri, cropData)
-        .then((croppedUri) => {
-          this.props.onDone(croppedUri);
-        })
-        .catch(err => {
-          console.log('cropping error');
-          console.log(err);
-        });
-        //
+        ImageEditor.cropImage(rotatedUri, cropData,
+          croppedImageURI => this.props.onDone(croppedImageURI),
+          cropError => console.log('cropping error', cropError));
       },
       (err) => {
         console.log(err);
